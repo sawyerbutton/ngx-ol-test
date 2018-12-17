@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.config = {
-      sourceType: 'OSM',
+      sourceType: 'XYZ',
       center: [117, 31],
       zoom: 10,
       imageURL: 'assets/3.png',

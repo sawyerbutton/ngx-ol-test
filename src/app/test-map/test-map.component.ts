@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 import OSM from 'ol/source/OSM';
+import XYZSource from 'ol/source/XYZ';
 import View from 'ol/View';
 import {fromLonLat, toLonLat} from 'ol/proj';
 import Feature from 'ol/Feature';
@@ -28,18 +29,25 @@ export class TestMapComponent implements OnInit {
 
   ngOnInit() {
     if (this.config) {
-      console.log(1);
       this.setCustomizeMap();
-      // this.addMarkersOnMap();
     } else {
-      console.log(2);
       this.setDefaultMap();
-      // this.addMarkersOnMap();
     }
   }
 
+  // 设置自定义图像
   setCustomizeMap() {
-    const source = this.config.sourceType === 'OSM' ? new OSM() : null;
+    // const source = this.config.sourceType === 'OSM' ? new OSM() : null;
+    let source = null;
+    switch (this.config.sourceType) {
+      case 'OSM':
+        source = new OSM();
+        break;
+      case 'XYZ':
+        source = new XYZSource({
+          url: 'http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg'
+        });
+    }
     const center = fromLonLat(this.config.center);
     const zoom = this.config.zoom;
     this.layer = new TileLayer({
