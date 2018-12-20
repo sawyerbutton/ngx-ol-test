@@ -46,5 +46,8 @@ export class AppComponent implements OnInit {
   removeLineLayerOnMap() {
     this.testMap.removeLineLayerOnMap();
   }
+  // addInteractionOnMap() {
+  //   this.testMap.removeCurrentMapAndAddInteraction();
+  // }
 }
 

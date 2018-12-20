@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 import OSM from 'ol/source/OSM';
@@ -10,7 +10,9 @@ import {Point, LineString} from 'ol/geom';
 import * as olSource from 'ol/source';
 import {Vector as layerVector} from 'ol/layer';
 import {Style, Icon, Stroke} from 'ol/style';
-
+// import DragAndDrop from 'ol/interaction/DragAndDrop';
+// import {GeoJSON} from 'ol/format';
+import sync from 'ol-hashed';
 @Component({
   selector: 'app-test-map',
   templateUrl: './test-map.component.html',
@@ -33,6 +35,7 @@ export class TestMapComponent implements OnInit {
     } else {
       this.setDefaultMap();
     }
+    sync(this.map);
   }
 
   // 设置自定义图像
@@ -141,4 +144,16 @@ export class TestMapComponent implements OnInit {
   removeLineLayerOnMap() {
     this.map.removeLayer(this.lineLayer);
   }
+  // removeCurrentMapAndAddInteraction() {
+  //   this.map.removeLayer(this.layer);
+  //   const source = new olSource.Vector();
+  //   const layer = new olSource.Vector({
+  //     source: source
+  //   });
+  //   this.map.addLayer(layer);
+  //   this.map.addInteraction(new DragAndDrop({
+  //     source: source,
+  //     formatConstructors: [GeoJSON]
+  //   }));
+  // }
 }
